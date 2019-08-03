@@ -624,6 +624,7 @@ __Refactor the model to separate the core concepts from supporting players (incl
 ### Abstract Core
 
 Even the core domain model usually has so much detail that communicating the big picture can be difficult.
+
 When there is a lot of interaction between subdomains in separate modules, either many references will have to be created between modules, which defeats much of the value of the partitioning, or the interaction will have to be made indirect, which makes the model obscure.
 
 Therefore:

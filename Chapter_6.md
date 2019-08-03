@@ -1,6 +1,6 @@
 ## VI. Large-scale Structure for Strategic Design
 
-In a large system without any overarching principle that allows elements to be interpreted in terms of their role in patterns that span the whole design, developers cannot see the forest for the trees. We need to be able to understand the role of an individual part in the whole without delving into the details of the whole.
+設計全体にわたるパターンでの要素の役割に関して要素を解釈できるようにするための包括的な原則がない大規模システムでは、開発者は状況の把握が困難になります。 私達は全体の細部を掘り下げることなく、全体の中で個々の部分が果たす役割を理解できなければなりません。
 
 A “large-scale structure” is a language that lets you discuss and understand the system in broad strokes. A set of high-level concepts or rules, or both, establishes a pattern of design for an entire system. This organizing principle can guide design as well as aid understanding. It helps coordinate independent work because there is a shared concept of the big picture: how the roles of various parts shape the whole.
 
