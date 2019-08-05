@@ -62,36 +62,36 @@ You sometimes get halfway to this pattern. The argument matches the implementer,
 
 ### Declarative Design
 
-There can be no real guarantees in procedural software. To name just one way of evading assertions, code could have additional side effects that were not specifically excluded. No matter how model-driven our design is, we still end up writing procedures to produce the effect of the conceptual interactions. And we spend much of our time writing boilerplate code that doesn’t really add any meaning or behavior. Intention-revealing interfaces and the other patterns in this chapter help, but they can never give conventional object-oriented programs formal rigor.
+手続き型ソフトウェアには本当の保証はありません。 アサーションを回避するための1つの方法だけを挙げると、コードには特に除外されていない追加の副作用があります。 モデル駆動型の設計がどのようなものであっても、概念上の相互作用の効果を生み出すための手順を書くことになります。 そして、私たちは時間をかけて、意味や動作を追加することのない定型コードを書いています。 この章の意図を明らかにするインターフェースやその他のパターンは役に立ちますが、従来のオブジェクト指向プログラムを形式的に厳密にすることはありません。
 
-These are some of the motivations behind declarative design. This term means many things to many people, but usually it indicates a way to write a program, or some part of a program, as a kind of executable specification. A very precise description of properties actually controls the software. In its various forms, this could be done through a reflection mechanism or at compile time through code generation (producing conventional code automatically, based on the declaration). This approach allows another developer to take the declaration at face value. It is an absolute guarantee.
+これらは宣言的デザインの背後にある動機のいくつかです。 この用語は多くの人にとって多くのことを意味しますが、通常はプログラム、またはプログラムの一部を一種の実行可能仕様として書く方法を示します。 プロパティの非常に正確な説明が実際にソフトウェアを制御します。 さまざまな形式で、これはリフレクションメカニズムを通じて、またはコード生成を通じてコンパイル時に（宣言に基づいて従来のコードを自動的に生成することによって）行うことができます。 このアプローチにより、他の開発者は宣言を書いてあるとおりに受け取ります。 絶対的な保証です。
 
-Many declarative approaches can be corrupted if the developers bypass them intentionally or unintentionally. This is likely when the system is difficult to use or overly restrictive. Everyone has to follow the rules of the framework in order to get the benefits of a declarative program.
+開発者が意図的・意図しないにかかわらず、それらを回避すると、多くの宣言型アプローチが破損する可能性があります。 これは、システムの使用が難しい、または過度に制限が厳しい場合に発生する可能性があります。 宣言型プログラムの恩恵を受けるためには、誰もがフレームワークの規則に従わなければなりません。
 
 #### A Declarative Style of Design
 
-Once your design has intention-revealing interfaces, side-effect-free functions, and assertions, you are edging into declarative territory. Many of the benefits of declarative design are obtained once you have combinable elements that communicate their meaning, and have characterized or obvious effects, or no observable effects at all.
+あなたのデザインが意図を明らかにするインターフェース、副作用のない関数、そしてアサーションを持っていると、あなたは宣言的領域に近づいています。 宣言的デザインの利点の多くは、それらの意味を伝える組み合わせ可能な要素があり、特徴的または明白な効果がある、またはまったく観察可能な効果がない場合に得られます。
 
-A supple design can make it possible for the client code to use a declarative style of design. To illustrate, the next section will bring together some of the patterns in this chapter to make the specification more supple and declarative.
+柔軟な設計では、クライアントコードで宣言型の設計を使用できます。 説明のために、次のセクションでは、この章のいくつかのパターンをまとめて、仕様をより柔軟で宣言的なものにします。
 
 ### Drawing on Established Formalisms
 
-Creating a tight conceptual framework from scratch is something you can’t do every day. Sometimes you discover and refine one of these over the course of the life of a project. But you can often use and adapt conceptual systems that are long established in your domain or others, some of which have been refined and distilled over centuries. Many business applications involve accounting, for example. Accounting defines a well-developed set of entities and rules that make for an easy adaptation to a deep model and a supple design.
+厳密な概念的フレームワークをゼロから作成することは、毎日できないことです。 時にはあなたはプロジェクトの人生の過程でこれらの一つを発見しそして改良する。 しかし、あなたは自分の分野や他の分野で長い間確立されてきた概念的システムをしばしば使用し適応させることができます。そのいくつかは何世紀にもわたって洗練され蒸留されてきました。 たとえば、多くのビジネスアプリケーションには会計が含まれます。 会計は、深いモデルと柔軟な設計への容易な適応を可能にする、よく開発されたエンティティと規則のセットを定義します。
 
-There are many such formalized conceptual frameworks, but my personal favorite is math. It is surprising how useful it can be to pull out some twist on basic arithmetic. Many domains include math somewhere. Look for it. Dig it out. Specialized math is clean, combinable by clear rules, and people find it easy to understand.
+そのような形式化された概念的フレームワークはたくさんありますが、私の個人的なお気に入りは数学です。 基本的な算術を少し工夫することがいかに役に立つかは驚くべきことです。 多くのドメインはどこかに数学を含んでいます。 それを探す。 それを掘り出しなさい。 専門の数学はきれいで、明確な規則と組み合わせることができ、人々はそれを理解するのが簡単だと感じます。
 
-A real-world example, “Shares Math,” was discussed in Chapter 8 of the book, Domain-Driven Design.
+実例「Shares Math」は、本の第8章「Domain-Driven Design」で説明されています。
 
 ### Conceptual Contours
 
-Sometimes people chop functionality fine to allow flexible combination. Sometimes they lump it large to encapsulate complexity. Sometimes they seek a consistent granularity, making all classes and operations to a similar scale. These are oversimplifications that don’t work well as general rules. But they are motivated by basic problems.
+時々人々は柔軟な組み合わせを可能にするために機能性を細かく刻みます。 時には彼らは複雑さをカプセル化するためにそれを大きくまとめます。 時には彼らは一貫した粒度を求め、すべてのクラスとオペレーションを同じ規模にします。 これらは一般的なルールとしてはうまく機能しない単純化しすぎです。 しかし、それらは基本的な問題によって動機付けられています。
 
-When elements of a model or design are embedded in a monolithic construct, their functionality gets duplicated. The external interface doesn’t say everything a client might care about. Their meaning is hard to understand, because different concepts are mixed together.
+モデルやデザインの要素がモノリシック構造に埋め込まれていると、それらの機能は重複します。 外部インターフェースは、クライアントが気にするかもしれないことすべてを言うわけではありません。 異なる概念が混在しているので、それらの意味は理解するのが難しいです。
 
-Conversely, breaking down classes and methods can pointlessly complicate the client, forcing client objects to understand how tiny pieces fit together. Worse, a concept can be lost completely. Half of a uranium atom is not uranium. And of course, it isn’t just grain size that counts, but just where the grain runs.
+逆に、クラスやメソッドを細かく分割するとクライアントが無意味に複雑になる可能性があり、クライアントオブジェクトに小さな部分がどのように適合するかを理解させることになります。 さらに悪いことに、概念は完全に失われる可能性があります。 ウラン原子の半分はウランではありません。 もちろん、重要なのはグレインサイズだけではなく、グレインが流れる場所だけです。
 
 Therefore:
 
-__Decompose design elements (operations, interfaces, classes, and aggregates) into cohesive units, taking into consideration your intuition of the important divisions in the domain. Observe the axes of change and stability through successive refactorings and look for the underlying conceptual contours that explain these shearing patterns. Align the model with the consistent aspects of the domain that make it a viable area of knowledge in the first place.__
+__ドメイン内の重要な部門に関する直感を考慮しながら、設計要素（オペレーション、インターフェース、クラス、および集合体）をまとまりのある単位に分解します。 連続的なリファクタリングを通じて変化の軸と安定性を観察し、これらのせん断パターンを説明する根本的な概念的な輪郭を探します。 そもそもそれを実行可能な知識の領域にするドメインの一貫した側面にモデルを合わせます。__
 
-A supple design based on a deep model yields a simple set of interfaces that combine logically to make sensible statements in the ubiquitous language, and without the distraction and maintenance burden of irrelevant options.
+深いモデルに基づくしなやかな設計は、ユビキタスな言語で理にかなったステートメントを作るために論理的に結合して、無関係なオプションの気を散らすこととメンテナンスの負担なしで、単純なインタフェースのセットを生み出します。

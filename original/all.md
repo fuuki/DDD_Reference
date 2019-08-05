@@ -9,7 +9,61 @@
 
 ## Contents
 
-略
+- Acknowledgements
+- Definitions
+- Pattern Language Overview
+
+- I. Putting the Model to Work
+  - Bounded Context
+  - Ubiquitous Language
+  - Continuous Integration
+  - Model-Driven Design
+  - Hands-on Modelers
+  - Refactoring Toward Deeper Insight
+- II. Building Blocks of a Model-Driven Design
+  - Layered Architecture
+  - Entities
+  - Value Objects
+  - Domain Events *
+  - Services
+  - Modules
+  - Aggregates
+  - Repositories
+  - Factories
+- III. Supple Design
+  - Intention-Revealing Interfaces
+  - Side-Effect-Free Functions
+  - Assertions
+  - Standalone Classes
+  - Closure of Operations
+  - Declarative Design
+  - Drawing on Established Formalisms
+  - Conceptual Contours
+- IV. Context Mapping for Strategic Design
+  - Context Map
+  - Partnership *
+  - Shared Kernel
+  - Customer/Supplier Development
+  - Conformist
+  - Anticorruption Layer
+  - Open-host Service
+  - Published Language
+  - Separate Ways
+  - Big Ball of Mud *
+- V. Distillation for Strategic Design
+  - Core Domain
+  - Generic Subdomains
+  - Domain Vision Statement
+  - Highlighted Core
+  - Cohesive Mechanisms
+  - Segregated Core
+  - Abstract Core
+- VI. Large-scale Structure for Strategic Design
+  - Evolving Order
+  - System Metaphor
+  - Responsibility Layers
+  - Knowledge Level
+  - Pluggable Component Framework
 
 \* New term introduced since the 2004 book.
 
