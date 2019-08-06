@@ -60,7 +60,8 @@ __Iron out difficulties by experimenting with alternative expressions, which ref
 
 ### Continuous Integration
 
-Once a bounded context has been defined, we must keep it sound.
+_Once a bounded context has been defined, we must keep it sound._
+
 When a number of people are working in the same bounded context, there is a strong tendency for the model to fragment. The bigger the team, the bigger the problem, but as few as three or four people can encounter serious problems. Yet breaking down the system into ever-smaller contexts eventually loses a valuable level of integration and coherency.
 
 Therefore:
@@ -96,4 +97,3 @@ Using a proven set of basic building blocks along with consistent language bring
 Traditionally, refactoring is described in terms of code transformations with technical motivations. Refactoring can also be motivated by an insight into the domain and a corresponding refinement of the model or its expression in code.
 
 Sophisticated domain models seldom turn out useful except when developed through an iterative process of refactoring, including close involvement of the domain experts with developers interested in learning about the domain.
-
