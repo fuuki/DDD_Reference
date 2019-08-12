@@ -65,6 +65,7 @@ Domain events are ordinarily immutable, as they are a record of something in the
 ### Services
 
 Sometimes, it just isn’t a thing.
+
 Some concepts from the domain aren’t natural to model as objects. Forcing the required domain functionality to be the responsibility of an entity or value either distorts the definition of a model-based object or adds meaningless artificial objects.
 
 Therefore:
@@ -124,4 +125,3 @@ Creation of an object can be a major operation in itself, but complex assembly o
 Therefore:
 
 __Shift the responsibility for creating instances of complex objects and aggregates to a separate object, which may itself have no responsibility in the domain model but is still part of the domain design. Provide an interface that encapsulates all complex assembly and that does not require the client to reference the concrete classes of the objects being instantiated. Create an entire aggregate as a piece, enforcing its invariants. Create a complex value object as a piece, possibly after assembling the elements with a builder.__
-

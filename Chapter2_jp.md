@@ -4,123 +4,125 @@
 
 ### Layered Architecture
 
-オブジェクト指向プログラムでは、UI、データベース、およびその他のサポートコードは、多くの場合、ビジネスオブジェクトに直接書き込まれます。 追加のビジネスロジックは、UIウィジェットおよびデータベーススクリプトの動作に組み込まれています。 このような方法は、短期的には、プログラムを動作させるのに最も簡単であるために行われます。
+オブジェクト指向プログラムでは、UI、データベース、およびその他の補助的なコードは、ビジネスオブジェクトに直接書き込まれることがよくあります。追加のビジネスロジックは、UIウィジェットおよびデータベーススクリプトの動作に組み込まれます。このような方法は、短期的には、プログラムを動作させるのに最も簡単であるために行われます。
 
-このような大量の他のコードを介してドメイン関連のコードが散乱すると、見辛く、解析が非常に困難になります。 UIに対する表面的な変更は、実際にはビジネスロジックを変更している可能性があります。ビジネスルールを変更するには、UIコード、データベースコード、またはその他のプログラム要素を綿密にトレースする必要があります。コヒーレントでモデル駆動型のオブジェクトを実装することは現実的ではありません。自動テストが扱いにくくなります。それぞれの活動に関わるすべての技術と論理で、プログラムは非常に単純に保たれなければならなりません。さもなければ、理解するのが不可能になります。
+このように、ドメイン関連のコードが大量の他のコードの中で散乱すると、見辛く、読み取りが非常に困難になります。 UIに対する表面的な変更が、実際にはビジネスロジックを変更してしまうかもしれません。ビジネスルールを変更するには、UIコード、データベースコード、またはその他のプログラム要素を綿密にトレースする必要があります。首尾一貫したモデル駆動型のオブジェクトを実装することが現実的ではなくなってしまいます。自動テストが扱いにくくなります。それぞれの活動に関わるすべての技術と論理で、プログラムは非常に単純に保たれなければならなりません。さもなければ、理解するのが不可能になります。
 
-Therefore:
+したがって:
 
-__ドメインモデルとビジネスロジックの表現を分離し、ビジネスロジックではないインフラストラクチャ、ユーザーインターフェイス、アプリケーションロジックへの依存を排除しましょう。複雑なプログラムを複数の層に分割します。各レイヤーは、レイヤーの中でまとまりがあり、下のレイヤーにのみ依存する設計にしましょう。 スタンダードなアーキテクチャパターンに従って、上の層との疎結合を実現します。ドメインモデルに関連するすべてのコードを単一の層に集中させ、それをユーザーインターフェイス、アプリケーション、およびインフラストラクチャコードから分離します。ドメインオブジェクトは、自分自身の表示、自分自身の保存、アプリケーションタスクの管理などの責任を負うことなく、ドメインモデルの表現に集中できます。これにより、モデルを進化させて、不可欠なビジネス知識を捉え、それを機能させるのに十分なほどリッチで明確なものにすることができます。__
+__ドメインモデルとビジネスロジックの表現を分離し、ビジネスロジックではないインフラストラクチャ、ユーザーインターフェイス、アプリケーションロジックへの依存を排除しましょう。複雑なプログラムを複数のレイヤーに分割します。各レイヤーは、レイヤーの中で凝縮した、下のレイヤーにのみ依存する設計にしましょう。 スタンダードなアーキテクチャパターンに従って、上のレイヤーとの疎結合を実現します。ドメインモデルに関連するすべてのコードを単一のレイヤーに集中させ、それをユーザーインターフェイス、アプリケーション、およびインフラストラクチャコードから分離します。ドメインオブジェクトは、自分自身の表示、自分自身の保存、アプリケーションタスクの管理などの責任を負うことなく、ドメインモデルの表現に集中できます。これにより、モデルは不可欠なビジネス知識を捉え、それを機能させるのに十分なほどリッチで明確なものへと進化するのです。__
 
-ここでキーとなるゴールは隔絶です。「Hexagonal Architecture」などの関連するパターンは、ドメインモデル表現が、システムの他の部分への依存や参照を避けるのはもちろん、それ以上に役立つことがあります。
+ここで鍵となるゴールは分離です。「Hexagonal Architecture」などの関連するパターンは、ドメインモデル表現が、システムの他の部分への依存や参照を避けるのはもちろん、それ以上に役立たせることができるのです。
 
 ### Entities
 
-多くのオブジェクトは、ライフサイクルを経て、継続性と同一性のスレッドを表しますが、それらの属性は変わる可能性があります。
+多くのオブジェクトは、それらの属性値は変わることがあるにせよ、ライフサイクルの中で継続性と同一性のスレッドを表しています。
 
-ときに、主にオブジェクトを定義づけるのは、その属性ではありません。それらは時間の中を経て、しばしば異なる表現を横切って走る、同一識別子のスレッドを表します。属性が異なっていても、そのようなオブジェクトは別のオブジェクトと一致しなければならないことがあります。オブジェクトは同じ属性を持っていても他のオブジェクトと区別されなければなりません。誤ったIDを使用すると、データが破損する可能性があります。
+主にオブジェクトを定義づけるものが、その属性値ではないことがあります。それらは時間の中を経て、様々な異なる表現で表されたとしても、同一性のスレッドを表します。そのようなオブジェクトは、属性値が異なっていても、別のオブジェクトと一致しなければならないことがあります。オブジェクトは同じ属性を持っていても他のオブジェクトと区別されなければならないこともあります。同一性を誤ってしまうと、データが破損する可能性があります。
 
-Therefore:
+したがって:
 
-__オブジェクトが、その属性ではなく、その識別子によって区別される場合は、これをモデル内のその定義の中心にします。 クラス定義を単純にし、ライフサイクルの継続性と識別子に焦点を当てます。__
+__オブジェクトが、その属性ではなく、その識別子によって区別される場合は、これをモデル内のその定義の中心にします。 クラス定義を単純に保ち、ライフサイクルの継続性と同一性に焦点を当てます。__
 
-__形や履歴に関係なく、各オブジェクトを区別する方法を定義しましょう。 属性によってオブジェクトを一致させることを要求する要件に注意してください。 一意であることが保証されているシンボルを添付することによって、各オブジェクトに対して一意の結果が得られることが保証されている操作を定義します。 この識別手段は、外部から来る場合もあれば、システムによって作成されシステムに対して作成される任意の識別子である場合もありますが、モデル内のIDの区別に対応している必要があります。__
+__形状や履歴に関係なく、各オブジェクトを区別する方法を定義しましょう。属性値によってオブジェクトを一致させることを要求する要件に注意してください。各オブジェクトに対して、一意であることが保証されているシンボルを添えることで、一意の結果が得られることが保証される操作を定義しましょう。この識別手段は、外部から来たり、システム自身が作成する任意の識別子であったりするが、モデル内の同一性の区別に対応している必要があります。__
 
-__モデルは、それが意味するものが常に同じになるように定義しなければなりません。__
+__モデルは、同じものであるということがどういうことかを定義しなければなりません。__
 
 (aka Reference Objects)
 
 ### Value Objects
 
-いくつかのオブジェクトは物のいくつかの特性を記述または計算します。
+オブジェクトはモノの特性を記述したり、計算したりする。
 
-多くのオブジェクトは概念的なアイデンティティを持ちません。
+多くのオブジェクトは同一性の概念を持ちません。
 
-エンティティの識別情報を追跡することは不可欠ですが、他のオブジェクトに識別情報を添付すると、システムパフォーマンスが低下し、分析作業が追加され、すべてのオブジェクトを同じように見せることでモデルが混乱する可能性があります。 ソフトウェア設計は複雑さを伴う絶え間ない戦いです。 特別な取り扱いが必要な場合にのみ適用されるように、私たちは区別をしなければなりません。
+エンティティの識別情報を追跡することは不可欠ですが、他のオブジェクトに識別情報を添付すると、システムパフォーマンスが低下し、分析作業が追加され、すべてのオブジェクトを同じように見せることでモデルが混乱する可能性があります。ソフトウェア設計は複雑さを伴う絶え間ない戦いです。特別扱いをするのは必要な場合だけに留めるよう、区別する必要があります。
 
-ただし、このカテゴリのオブジェクトを単なる識別子の欠如と見なすと、ツールボックスや語彙に多くの情報が追加されません。 実際、これらのオブジェクトは、それぞれ独自の特性、およびモデルに対する独自の意味を持っています。 これらは物事を説明するオブジェクトです。
+ただし、このようなカテゴリのオブジェクトを、単に同一性がないものと見なしてしまうと、ツールボックスや語彙に情報があまり追加されません。実際には、これらのオブジェクトは、それぞれ独自の特性、およびモデルに対する独自の意味を持っています。これらは物事を説明するオブジェクトなのです。
 
 Therefore:
 
-__モデルの要素の属性とロジックだけを気にする場合は、値オブジェクトとして分類してください。 それが伝える属性の意味を表現し、それに関連する機能を与えるようにします。 値オブジェクトを不変として扱います。 すべての操作は、変更可能なステートに依存しない、副作用のない関数にします。 値オブジェクトに識別子を与えず、エンティティを維持するのに必要な設計の複雑さを避けてください。__
+__モデルの要素の属性値とロジックだけに関心がある場合は、それを値オブジェクトとして分類してください。それ自身が伝える属性値の意味を表現し、それに関連する機能を与えるようにします。値オブジェクトを不変なものとして扱います。すべての操作は、変更可能なステートに依存しない、副作用のない関数にします。値オブジェクトに同一性を与えず、エンティティを維持するのに必要な設計の複雑さを避けてください。__
 
 ### Domain Events *
 
 ドメインエキスパートが気にかけていることが起こりました。
 
-An entity is responsible for tracking its state and the rules regulating its lifecycle. But if you need to know the actual causes of the state changes, this is typically not explicit, and it may be difficult to explain how the system got the way it is. Audit trails can allow tracing, but are not usually suited to being used for the logic of the program itself. Change histories of entities can allow access to previous states, but ignores the meaning of those changes, so that any manipulation of the information is procedural, and often pushed out of the domain layer.
+エンティティは、そのステートとライフサイクルを規制するルールを追跡する責任を持ちます。しかし、ステート変更の実際の原因を知る必要がある場合、これは通常明示的ではなく、システムがどのような道を辿ったかを説明するのは難しいかもしれません。監査証跡はトレースを可能としますが、通常はプログラム自体のロジックに使用するのには適していません。エンティティの変更履歴があれば以前の状態へアクセスできますが、それらの変更の意味を無視するため、情報の操作は手続き型であり、多くの場合ドメイン層から押し出されます。
 
-A distinct, though related set of issues arises in distributed systems. The state of a distributed system cannot be kept completely consistent at all times. We keep the aggregates internally consistent at all times, while making other changes asynchronously. As changes propagate across nodes of a network, it can be difficult to resolve multiple updates arriving out of order or from distinct sources.
+分散システムでは、関連する一連の問題が発生します。分散システムのステートは常に完全に一貫性を保つことはできません。集合体は常に内部的に一貫性を保ち、一方で他の変更は非同期的に行います。変更がネットワークのノード全体に伝播するため、順不同・異なるソースから伝わる複数の更新を解決することは困難です。
 
-Therefore:
+したがって:
 
-__Model information about activity in the domain as a series of discrete events. Represent each event as a domain object. These are distinct from system events that reflect activity within the software itself, although often a system event is associated with a domain event, either as part of a response to the domain event or as a way of carrying information about the domain event into the system.__
+__ドメイン内のアクティビティに関する情報を一連の個別のイベントとしてモデル化します。各イベントをドメインオブジェクトとして表します。これらは、ソフトウェア自体のアクティビティを反映するシステムイベントとは異なりますが、多くの場合、システムイベントは、ドメインイベントへの応答の一部として、またはドメインイベントに関する情報をシステムに伝達する方法として、ドメインイベントに関連付けられます。__
 
-__A domain event is a full-fledged part of the domain model, a representation of something that happened in the domain. Ignore irrelevant domain activity while making explicit the events that the domain experts want to track or be notified of, or which are associated with state change in the other model objects.__
+__ドメインイベントは、ドメインモデルの成熟した部分であり、ドメインで発生した何かの表現です。ドメインエキスパートが追跡または通知するイベント、または他のモデルオブジェクトのステート変更に関連するイベントを明示しながら、無関係なドメインアクティビティを無視します。__
 
-In a distributed system, the state of an entity can be inferred from the domain events currently known to a particular node, allowing a coherent model in the absence of full information about the system as a whole.
+分散システムでは、特定のノードが現在認識しているドメインイベントからエンティティのステートを推測できるようにすることで、システム全体に関する完全な情報がなくても一貫性のあるモデルを実現することができます。
 
-Domain events are ordinarily immutable, as they are a record of something in the past. In addition to a description of the event, a domain event typically contains a timestamp for the time the event occurred and the identity of entities involved in the event. Also, a domain event often has a separate timestamp indicating when the event was entered into the system and the identity of the person who entered it. When useful, an identity for the domain event can be based on some set of these properties. So, for example, if two instances of the same event arrive at a node they can be recognized as the same.
+ドメインイベントは、過去の何かの記録であるため、通常不変です。 通常、ドメインイベントには、イベントの説明に加えて、イベントが発生した時間のタイムスタンプと、イベントに関係するエンティティのID（一意性）が含まれます。 また、ドメインイベントには多くの場合、イベントがシステムにいつ入力されたか、およびイベントを入力した人のID（一意性）を示す個別のタイムスタンプがあります。 有用な場合、ドメインイベントのIDは、これらのプロパティのセットに基づくことができます。 そのため、例えば、同じイベントの2つのインスタンスがノードに到着した場合、それらは同じものとして認識されます。
 
 ### Services
 
-Sometimes, it just isn’t a thing.
-Some concepts from the domain aren’t natural to model as objects. Forcing the required domain functionality to be the responsibility of an entity or value either distorts the definition of a model-based object or adds meaningless artificial objects.
+時々、それはモノではありません。
 
-Therefore:
+ドメインの一部の概念は、オブジェクトとしてモデル化するのが自然ではありません。必要なドメインの機能の責任をエンティティまたは値に押し付けると、モデルベースのオブジェクトの定義をゆがめたり、無意味で不自然なオブジェクトが増えてしまいます。
 
-__When a significant process or transformation in the domain is not a natural responsibility of an entity or value object, add an operation to the model as a standalone interface declared as a service. Define a service contract, a set of assertions about interactions with the service. (See assertions.) State these assertions in the ubiquitous language of a specific bounded context. Give the service a name, which also becomes part of the ubiquitous language.__
+したがって:
+
+__ドメイン内の重要なプロセスや変換がエンティティまたは値オブジェクトが責任を持つことが自然ではない場合、サービスとして宣言された、スタンドアロンインターフェイスとしてモデルに操作を追加します。 サービスコントラクト、つまりサービスとの相互作用に関する一連のアサーションを定義します。 （アサーションを参照してください。）これらのアサーションは、特定の有界コンテキストのユビキタス言語で述べてください。 サービスに名前を付けます。これは、ユビキタス言語の一部にもなります。__
 
 ### Modules
 
-Everyone uses modules, but few treat them as a full-fledged part of the model. Code gets broken down into all sorts of categories, from aspects of the technical architecture to developers’ work assignments. Even developers who refactor a lot tend to content themselves with modules conceived early in the project.
-Explanations of coupling and cohesion tend to make them sound like technical metrics, to be judged mechanically based on the distributions of associations and interactions. Yet it isn’t just code being divided into modules, but also concepts. There is a limit to how many things a person can think about at once (hence low coupling). Incoherent fragments of ideas are as hard to understand as an undifferentiated soup of ideas (hence high cohesion).
+誰もがモジュールを使用しますが、それらをモデルの一部として扱う人はほとんどいません。コードは、技術的アーキテクチャの側面、開発者の作業割当など、あらゆる種類のカテゴリに分類できます。多くのリファクタリングを行う開発者でさえ、プロジェクトの初期に考案されたモジュールで満足してしまう傾向があります。
+
+結合と凝縮の解説は、関連性と相互作用の配分に基づいて機械的に判断されるため、技術的なメトリックのように聞こえる傾向があります。 それでも、コードはモジュールに分割されるだけでなく、概念にもなります。 人が一度に考えることができる物の数には制限があります（したがって、低い結合度）。 一貫性のないアイデアの断片は、成熟していないアイデアのるつぼと同じくらい理解するのが困難です（したがって、高い凝集度）。
 
 Therefore:
 
-__Choose modules that tell the story of the system and contain a cohesive set of concepts. Give the modules names that become part of the ubiquitous language. Modules are part of the model and their names should reflect insight into the domain.__
+__システムのストーリーを伝えるモジュールを選択し、凝縮した概念のセットを含めます。 ユビキタス言語の一部となるモジュール名を付けます。 モジュールはモデルの一部であり、その名前はドメインへの洞察を反映する必要があります。__
 
-__This often yields low coupling between modules, but if it doesn’t look for a way to change the model to disentangle the concepts, or an overlooked concept that might be the basis of a module that would bring the elements together in a meaningful way. Seek low coupling in the sense of concepts that can be understood and reasoned about independently. Refine the model until it partitions according to high-level domain concepts and the corresponding code is decoupled as well.__
+__概念を解きほぐすためにモデルを変更する方策、または要素を意味のある方法でまとめるモジュールの基礎となりうる概念を見落としてないかを追求することで、モジュール間の低い結合がもたらされます。概念の意味を独立して理解・推論できるような低結合を求めます。 高レベルのドメイン概念に従って区切られ、対応するコードも同様に分離されるまで、モデルを改良します。__
 
 (aka Packages)
 
 ### Aggregates
 
-It is difficult to guarantee the consistency of changes to objects in a model with complex associations. Objects are supposed to maintain their own internal consistent state, but they can be blindsided by changes in other objects that are conceptually constituent parts. Cautious database locking schemes cause multiple users to interfere pointlessly with each other and can make a system unusable. Similar issues arise when distributing objects among multiple servers, or designing asynchronous transactions.
+複雑な関連付けを持つモデル内のオブジェクトへの変更の一貫性を保証することは困難です。 オブジェクトは独自の内部一貫性状態を維持することになっていますが、概念的には構成要素である他のオブジェクトの変更によって盲目的になる可能性があります。 注意深いデータベースロックスキームにより、複数のユーザーが互いに無意味に干渉し、システムが使用できなくなる可能性があります。 オブジェクトを複数のサーバーに分散するとき、または非同期トランザクションを設計するときに、同様の問題が発生します。
 
 Therefore:
 
-__Cluster the entities and value objects into aggregates and define boundaries around each. Choose one entity to be the root of each aggregate, and allow external objects to hold references to the root only (references to internal members passed out for use within a single operation only). Define properties and invariants for the aggregate as a whole and give enforcement responsibility to the root or some designated framework mechanism.__
+__エンティティと値オブジェクトをクラスターに集約し、それぞれの周囲の境界を定義します。 各集約のルートとなるエンティティを1つ選択し、外部オブジェクトがルートへの参照のみを保持できるようにします（単一操作内でのみ使用するために渡される内部メンバーへの参照）。 集合体全体のプロパティと不変条件を定義し、ルートまたは指定されたフレームワークメカニズムに施行責任を与えます。__
 
-Use the same aggregate boundaries to govern transactions and distribution.
+同じ集約境界を使用して、トランザクションとディストリビューションを管理します。
 
-Within an aggregate boundary, apply consistency rules synchronously. Across boundaries, handle updates asynchronously.
+集約境界内で、整合性ルールを同期的に適用します。 境界を越えて、非同期的に更新を処理します。
 
-Keep an aggregate together on one server. Allow different aggregates to be distributed among nodes.
+1つのサーバーに集約をまとめます。 異なる集約をノード間で分散できるようにします。
 
-When these design decisions are not being guided well by the aggregate boundaries, reconsider the model. Is the domain scenario hinting at an important new insight? Such changes often improve the model’s expressiveness and flexibility as well as resolving the transactional and distributional issues.
+これらの設計上の決断が集約境界によってうまく導かれない場合は、モデルを再検討してください。 ドメインシナリオは重要な新しい洞察を示唆していますか？ 多くの場合、このような変更を行うことで、モデルの表現力と柔軟性が向上し、トランザクションおよびディストリビューションの問題が解決します。
 
 ### Repositories
 
-_Query access to aggregates expressed in the ubiquitous language._
+_ユビキタス言語で表現された集約へのクエリアクセス。_
 
-Proliferation of traversable associations used only for finding things muddles the model. In mature models, queries often express domain concepts. Yet queries can cause problems.
+物事を見つけるためだけに横断的な関連付けを使うことが拡散されると、モデルが混乱します。成熟したモデルでは、クエリはしばしばドメインの概念を表現します。それでも、クエリは問題を引き起こす可能性があります。
 
-The sheer technical complexity of applying most database access infrastructure quickly swamps the client code, which leads developers to dumb-down the domain layer, which makes the model irrelevant.
+データベースアクセスインフラストラクチャを適用することはたいてい技術的に複雑であるため、クライアントコードはすぐに沈められ、開発者はドメインレイヤーを簡略化して伝えることになり、モデルは無関係になります。
 
-A query framework may encapsulate most of that technical complexity, enabling developers to pull the exact data they need from the database in a more automated or declarative way, but that only solves part of the problem.
+クエリフレームワークは、その技術的な複雑さのほとんどをカプセル化し、開発者がデータベースから必要なデータをより自動化または宣言的な方法で引き出すことを可能にしますが、それは問題の一部を解決するだけです。
 
-Unconstrained queries may pull specific fields from objects, breaching encapsulation, or instantiate a few specific objects from the interior of an aggregate, blindsiding the aggregate root and making it impossible for these objects to enforce the rules of the domain model. Domain logic moves into queries and application layer code, and the entities and value objects become mere data containers.
+制約のないクエリは、オブジェクトから特定のフィールドを取り出したり、カプセル化を破ったり、集約の内部からいくつかの特定のオブジェクトをインスタンス化し、集約ルートを隠蔽して、これらのオブジェクトがドメインモデルのルールを実施できないようにします。 ドメインロジックはクエリとアプリケーションレイヤーコードに移行し、エンティティと値オブジェクトは単なるデータコンテナーになります。
 
 Therefore:
 
-__For each type of aggregate that needs global access, create a service that can provide the illusion of an in-memory collection of all objects of that aggregate’s root type. Set up access through a well-known global interface. Provide methods to add and remove objects, which will encapsulate the actual insertion or removal of data in the data store. Provide methods that select objects based on criteria meaningful to domain experts. Return fully instantiated objects or collections of objects whose attribute values meet the criteria, thereby encapsulating the actual storage and query technology, or return proxies that give the illusion of fully instantiated aggregates in a lazy way. Provide repositories only for aggregate roots that actually need direct access. Keep application logic focused on the model, delegating all object storage and access to the repositories.__
+__グローバルアクセスが必要な集約の各タイプについて、その集約のルートタイプのすべてのオブジェクトのメモリ内コレクションのように扱うことができるようなサービスを作成します。既知のグローバルインターフェイスを介してアクセスを設定します。データストア内のデータの実際の挿入・削除をカプセル化するため、オブジェクトを追加・削除するメソッドを提供します。ドメインの専門家にとって意味のある基準に基づいてオブジェクトを選択（select）するメソッドを提供します。 完全にインスタンス化されたオブジェクトまたは属性値が基準を満たすオブジェクトのコレクションを返すことにより、実際のストレージとクエリテクノロジーをカプセル化します。または、完全にインスタンス化された集計を怠zyに見せかけるプロキシを返します。 実際に直接アクセスする必要がある集約ルートに対してのみリポジトリを提供します。 アプリケーションロジックをモデルに集中させ、すべてのオブジェクトストレージとリポジトリへのアクセスを委任します。__
 
 ### Factories
 
-When creation of an entire, internally consistent aggregate, or a large value object, becomes complicated or reveals too much of the internal structure, factories provide encapsulation.
-Creation of an object can be a major operation in itself, but complex assembly operations do not fit the responsibility of the created objects. Combining such responsibilities can produce ungainly designs that are hard to understand. Making the client direct construction muddies the design of the client, breaches encapsulation of the assembled object or aggregate, and overly couples the client to the implementation of the created object.
+内部的に一貫性のある全体的な集約、または大きな値のオブジェクトの作成が複雑になったり、内部構造が明らかになりすぎたりすると、工場はカプセル化を提供します。
+オブジェクトの作成はそれ自体が主要な操作になりますが、複雑なアセンブリ操作は作成されたオブジェクトの責任に適合しません。 このような責任を組み合わせることで、理解しにくい不格好なデザインを生み出す可能性があります。 クライアントを直接構築すると、クライアントの設計が混乱し、組み立てられたオブジェクトまたは集合体のカプセル化が破られ、作成されたオブジェクトの実装にクライアントが過度に結合されます。
 
 Therefore:
 
-__Shift the responsibility for creating instances of complex objects and aggregates to a separate object, which may itself have no responsibility in the domain model but is still part of the domain design. Provide an interface that encapsulates all complex assembly and that does not require the client to reference the concrete classes of the objects being instantiated. Create an entire aggregate as a piece, enforcing its invariants. Create a complex value object as a piece, possibly after assembling the elements with a builder.__
+__複雑なオブジェクトと集合体のインスタンスを作成する責任を別のオブジェクトに移します。これは、ドメインモデルには責任を持たない可能性がありますが、それでもドメイン設計の一部です。 すべての複雑なアセンブリをカプセル化し、インスタンス化されるオブジェクトの具体的なクラスをクライアントが参照する必要のないインターフェイスを提供します。 集合体全体をピースとして作成し、その不変条件を適用します。 おそらくビルダーで要素を組み立てた後、複雑な値オブジェクトをピースとして作成します。__
