@@ -1,10 +1,10 @@
 ## III. Supple Design
 
-開発が進行するにつれてプロジェクトを加速させるには、―独自の遺産に惑わされるのではなく、―変更を促しながら取り組むのが楽しいデザインが必要です。 しなやかなデザイン。
+開発が進行するにつれてプロジェクトを加速させるには、― 独自の遺産に惑わされるのではなく、― 変更を促しながら取り組むのが楽しい設計が必要です。 しなやかな設計。
 
-しなやかなデザインは深いモデリングを補完するものです。
+しなやかな設計は深いモデリングを補完するものです。
 
-開発者は2つの役割を果たしますが、それぞれを設計によって提供する必要があります。 同じ人が両方の役割を果たす可能性があります。数分で切り替えることもできますが、それでもコードとの関係は異なります。 1つの役割は、設計の機能を利用して、ドメインオブジェクトをアプリケーションコードまたは他のドメイン層のコードに織り込むクライアント開発者です。 しなやかなデザインは、その潜在力を明確にする深い基礎となるモデルを明らかにします。 クライアント開発者は、最小限の疎結合概念を柔軟に使用して、ドメイン内のさまざまなシナリオを表現できます。 構成要素は、予測可能で、明確に特徴付けられ、堅牢である結果を伴って、自然な方法で共々にフィットします。
+開発者は2つの役割を果たしますが、それぞれを設計によって果たす必要があります。 同じ人が両方の役割を果たすことがあります。（数分で切り替えることはできるでしょうが）それでもコードとの関係は異なります。 役割の1つは、クライアント開発者です。これは、設計の機能を利用して、ドメインオブジェクトをアプリケーションコードまたは他のドメイン層のコードに織り込みます。しなやかな設計は、その潜在力を明確にする深い基礎となるモデルを明らかにします。 クライアント開発者は、最小限の疎結合概念を柔軟に使用して、ドメイン内のさまざまなシナリオを表現できます。 構成要素は、予測可能で、明確に特徴付けられ、堅牢である結果を伴って、自然な方法で共々にフィットします。
 
 同様に重要なことは、デザインはそれを変更するために働いている開発者に役立つべきです。 変更をオープンにするには、デザインは理解しやすいものでなければならず、クライアント開発者が描いているのと同じ基礎モデルを明らかにします。 それはドメインの深いモデルの輪郭に沿うものでなければならず、ほとんどの変更は設計の柔軟なポイントで行います。 そのコードの影響は透過的に明白でなければならないので、変更の結果は予想しやすいでしょう。
 
@@ -22,13 +22,13 @@ __期待動作と実装の意味を他に参照することなく、それらの
 
 ### Side-Effect-Free Functions
 
-Interactions of multiple rules or compositions of calculations become extremely difficult to predict. The developer calling an operation must understand its implementation and the implementation of all its delegations in order to anticipate the result. The usefulness of any abstraction of interfaces is limited if the developers are forced to pierce the veil. Without safely predictable abstractions, the developers must limit the combinatory explosion, placing a low ceiling on the richness of behavior that is feasible to build.
+複数のルールの相互作用や計算の構成は、予測が非常に困難になります。 操作を呼び出す開発者は、結果を予測するために、その実装とすべての委任の実装を理解する必要があります。 開発者がベールを突き刺さなければならない場合、インターフェースの抽象化の有用性は制限されます。 安全に予測可能な抽象化がないと、開発者は組み合わせの爆発を制限し、構築可能な動作の豊富さに低い上限を設定する必要があります。
 
 Therefore:
 
-__Place as much of the logic of the program as possible into functions, operations that return results with no observable side effects. Strictly segregate commands (methods which result in modifications to observable state) into very simple operations that do not return domain information. Further control side effects by moving complex logic into value objects when a concept fitting the responsibility presents itself.__
+__プログラムのロジックのできるだけ多くを、目に見える副作用なしで結果を返す関数、操作に配置します。 コマンド（観測可能な状態を変更するメソッド）をドメイン情報を返さない非常に単純な操作に厳密に分離します。 責任に適合する概念が存在する場合、複雑なロジックを値オブジェクトに移動することにより、副作用をさらに制御します。__
 
-__All operations of a value object should be side-effect-free functions.__
+__値オブジェクトのすべての操作は、副作用のない関数でなければなりません。__
 
 ### Assertions
 
@@ -44,9 +44,9 @@ __操作の事後条件とクラスおよび集合体の不変条件を記述し
 
 ### Standalone Classes
 
-モジュール内であっても、依存関係が追加されるにつれて、デザインを解釈することの難しさは激しく増加します。 これは精神的な負荷を増し、開発者の扱う設計の複雑性の許容範囲を弱めます。 暗黙の概念は明示的な参照よりも、この負荷を増加します。
+モジュール内であっても、依存関係が追加されるにつれて、設計を解釈することの難しさは激しく増加します。 これは精神的な負荷を増し、開発者の扱う設計の複雑性の許容範囲を弱めます。 暗黙の概念は明示的な参照よりも、この負荷を増加します。
 
-__低結合は、オブジェクト設計の基本です。 可能であれば、ずっと行ってください。 クラスの設計書から他のすべての概念を取り除きます。 その後、クラスは完全に自己完結型になり、一人で学習し理解することができます。 そのような自己完結型のクラスはすべて、モジュール理解の負担を大幅に軽減します。__
+__低結合は、オブジェクト設計の基本です。可能なかぎり行わなければなりません。クラスの設計書から他のすべての概念を取り除きます。 その後、クラスは完全に自己完結型になり、一人で学習し理解することができます。 そのような自己完結型のクラスはすべて、モジュール理解の負担を大幅に軽減します。__
 
 ### Closure of Operations
 
@@ -54,11 +54,11 @@ __低結合は、オブジェクト設計の基本です。 可能であれば�
 
 Therefore:
 
-__Where it fits, define an operation whose return type is the same as the type of its argument(s). If the implementer has state that is used in the computation, then the implementer is effectively an argument of the operation, so the argument(s) and return value should be of the same type as the implementer. Such an operation is closed under the set of instances of that type. A closed operation provides a high-level interface without introducing any dependency on other concepts.__
+__適合する場合は、戻り値の型が引数の型と同じである操作を定義します。 実装者が計算で使用される状態を持っている場合、実装者は事実上操作の引数であるため、引数と戻り値は実装者と同じ型である必要があります。 そのような操作は、そのタイプのインスタンスのセットの下で閉じられます。 クローズド操作は、他の概念に依存することなく、高レベルのインターフェースを提供します。__
 
-This pattern is most often applied to the operations of a value object. Because the life cycle of an entity has significance in the domain, you can’t just conjure up a new one to answer a question. There are operations that are closed under an entity type. You could ask an Employee object for its supervisor and get back another Employee. But in general, entities are not the sort of concepts that are likely to be the result of a computation. So, for the most part, this is an opportunity to look for in the value objects.
+このパターンは、ほとんどの場合、値オブジェクトの操作に適用されます。 エンティティのライフサイクルはドメインで重要であるため、質問に答えるために新しいものを思い起こさせることはできません。 エンティティタイプの下で閉じられる操作があります。Employee オブジェクトにその supervisor が誰かを訪ね、別のEmployee を取得することはあるでしょう。しかし、一般的に、エンティティは、計算の結果である可能性が高い種類の概念ではありません。そのため、ほとんどの場合、これは値オブジェクトを探す機会です。
 
-You sometimes get halfway to this pattern. The argument matches the implementer, but the return type is different, or the return type matches the receiver and the argument is different. These operations are not closed, but they do give some of the advantage of closure, in freeing the mind.
+このパターンをある程度満たすことがあります。引数は実装者と一致するが、戻り値の型が異なるか、戻り値の型が受信者と一致し、引数が異なります。これらの操作は閉じられていませんが、心を解放する上で、閉じの利点の一部を提供します。
 
 ### Declarative Design
 
