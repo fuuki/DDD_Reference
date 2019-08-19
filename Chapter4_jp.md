@@ -16,7 +16,7 @@
 
 #### free
 
-A software development context in which the direction, success or failure of development work in other contexts has little effect on delivery.
+他のコンテキストでの開発作業の方向、成功、または失敗が提供にほとんど影響しないソフトウェア開発コンテキスト。
 
 ### Context Map
 
@@ -44,17 +44,17 @@ __既存の地形をマッピングします。 後に変容するでしょう�
 
 2つのコンテキストで共にチームが成功または失敗すると、協力的な関係が頻繁に出現します。
 
-Poor coordination of mutually dependent subsystems in separate contexts leads to delivery failure for both projects. A key feature missing from one system might make the other system undeliverable. Interfaces that do not match the expectations of the developers of the other subsystem could cause integration to fail. A mutually agreed interface might turn out to be so awkward to use that it slows the development of the client system, or so difficult to implement that it slows the development of the server subsystem. Failure brings both projects down.
+別々のコンテキストで相互に依存するサブシステムを適切に調整しないと、両方のプロジェクトで配信エラーが発生します。 1つのシステムに重要な機能がないと、他のシステムが配信不能になる可能性があります。 他のサブシステムの開発者の期待に合わないインターフェースは、統合に失敗する可能性があります。 相互に同意されたインターフェースは、クライアントシステムの開発を遅らせるほど使用が困難であるか、サーバーサブシステムの開発を遅らせるほど実装が困難であることが判明する場合があります。 失敗すると、両方のプロジェクトが停止します。
 
 Therefore:
 
-__Where development failure in either of two contexts would result in delivery failure for both, forge a partnership between the teams in charge of the two contexts. Institute a process for coordinated planning of development and joint management of integration.__
+__2つのコンテキストのいずれかで開発が失敗すると、両方の配信が失敗する場合、2つのコンテキストを担当するチーム間のパートナーシップを構築します。 開発の統合された計画と統合の共同管理のためのプロセスを確立します。__
 
-__The teams must cooperate on the evolution of their interfaces to accommodate the development needs of both systems. Interdependent features should be scheduled so that they are completed for the same release.__
+__チームは、両方のシステムの開発ニーズに対応するために、インターフェースの進化に協力する必要があります。 相互依存機能は、同じリリースで完了するようにスケジュールする必要があります。__
 
-It is not necessary, most of the time, for developers to understand the model of the other subsystem in detail, but they must coordinate their project planning. When development in one context hits obstacles, then joint examination of the issue is called for, to find an expeditious design solution that does not overly compromise either context.
+ほとんどの場合、開発者が他のサブシステムのモデルを詳細に理解する必要はありませんが、プロジェクトの計画を調整する必要があります。 あるコンテキストでの開発が障害に直面した場合、どちらのコンテキストも過度に妥協しない迅速な設計ソリューションを見つけるために、問題の共同調査が求められます。
 
-Also, a clear process is needed to govern integration. For example, a special test suite can be defined that proves the interface meets the expectations of the client system, which can be run as part of continuous integration on the server system.
+また、統合を管理するには明確なプロセスが必要です。 たとえば、インターフェイスがクライアントシステムの期待を満たしていることを証明する特別なテストスイートを定義できます。これは、サーバーシステムでの継続的な統合の一部として実行できます。
 
 ### Shared Kernel
 
@@ -96,60 +96,60 @@ __上流チームのモデルに忠実に従うことで、境界のあるコン
 
 うまく設計された境界のあるコンテキストを協調的なチームと橋渡しするとき、翻訳レイヤは単純でエレガントなものになることがあります。 しかし、制御やコミュニケーションが、共有されたカーネル、パートナー、あるいはカスタマー/サプライヤの関係をやめるのに十分でない場合、翻訳はより複雑になります。 翻訳レイヤはより防御的なトーンを帯びます。
 
-A large interface with an upstream system can eventually overwhelm the intent of the downstream model altogether, causing it to be modified to resemble the other system’s model in an ad hoc fashion. The models of legacy systems are usually weak (if not big balls of mud), and even the exception that is clearly designed may not fit the needs of the current project, making it impractical to conform to the upstream model. Yet the integration may be very valuable or even required for the downstream project.
+上流システムとの大きなインターフェイスは、最終的に下流モデルの意図を完全に圧倒し、アドホックな方法で他のシステムのモデルに似るように変更されます。 レガシーシステムのモデルは通常弱く（泥の大きな球ではない場合）、明確に設計された例外でさえ、現在のプロジェクトのニーズに合わない場合があり、上流モデルに準拠することは実用的ではありません。 それでも、統合は非常に価値があり、下流プロジェクトに必要とされることさえあります。
 
 Therefore:
 
-__As a downstream client, create an isolating layer to provide your system with functionality of the upstream system in terms of your own domain model. This layer talks to the other system through its existing interface, requiring little or no modification to the other system. Internally, the layer translates in one or both directions as necessary between the two models.__
+__下流クライアントとして、独自のドメインモデルに関して、システムに上流システムの機能を提供する分離層を作成します。 この層は、既存のインターフェースを介して他のシステムと通信し、他のシステムをほとんどまたはまったく変更する必要がありません。 内部的に、レイヤーは必要に応じて2つのモデル間で一方向または両方向に移動します。__
 
 ### Open-host Service
 
-Typically for each bounded context, you will define a translation layer for each component with which you have to integrate that is outside the context. Where integration is one-off, this approach of inserting a translation layer for each external system avoids corruption of the models with a minimum of cost. But when you find your subsystem in high demand, you may need a more flexible approach.
+通常、有界コンテキストごとに、コンテキストの外部にある統合する必要のある各コンポーネントの翻訳レイヤーを定義します。 統合が1回限りである場合、各外部システムに変換レイヤーを挿入するこのアプローチは、最小限のコストでモデルの破損を回避します。 しかし、サブシステムの需要が高い場合、より柔軟なアプローチが必要になる場合があります。
 
-When a subsystem has to be integrated with many others, customizing a translator for each can bog down the team. There is more and more to maintain, and more and more to worry about when changes are made.
+サブシステムを他の多くのシステムと統合する必要がある場合、それぞれの翻訳者をカスタマイズするとチームが動かなくなる可能性があります。 メンテナンスがますます必要になり、変更が行われたときの心配が増えています。
 
 Therefore:
 
-__Define a protocol that gives access to your subsystem as a set of services. Open the protocol so that all who need to integrate with you can use it. Enhance and expand the protocol to handle new integration requirements, except when a single team has idiosyncratic needs. Then, use a one-off translator to augment the protocol for that special case so that the shared protocol can stay simple and coherent.__
+__サブシステムへのアクセスを一連のサービスとして提供するプロトコルを定義します。 あなたと統合する必要があるすべての人が使用できるように、プロトコルをオープンにします。 単一のチームに特異なニーズがある場合を除き、プロトコルを強化および拡張して、新しい統合要件を処理します。 次に、1回限りの翻訳を使用して、その特殊なケースのプロトコルを拡張し、共有プロトコルがシンプルで一貫性を保つようにします。__
 
-This places the provider of the service in the upstream position. Each client is downstream, and typically some of them will be conformist and some will build anticorruption layers. A context with an open host service might have any sort of relationship to contexts other than its clients.
+これにより、サービスのプロバイダーが上流の位置に配置されます。 各クライアントは下流であり、通常、それらの一部はコンフォーマストであり、一部は腐敗防止レイヤーを構築します。 オープンホストサービスを持つコンテキストは、そのクライアント以外のコンテキストと何らかの関係を持つ場合があります。
 
 ### Published Language
 
-_The translation between the models of two bounded contexts requires a common language._
+_2つの境界のあるコンテキストのモデル間の翻訳には、共通の言語が必要です。_
 
-Direct translation to and from the existing domain models may not be a good solution. Those models may be overly complex or poorly factored. They are probably undocumented. If one is used as a data interchange language, it essentially becomes frozen and cannot respond to new development needs.
+既存のドメインモデルとの間の直接変換は、良い解決策ではない場合があります。これらのモデルは、過度に複雑であるか、十分に因子化されていない場合があります。それらはおそらく文書化されていません。1つをデータ交換言語として使用すると、基本的に凍結され、新しい開発ニーズに対応できなくなります。
 
 Therefore:
 
-__Use a well-documented shared language that can express the necessary domain information as a common medium of communication, translating as necessary into and out of that language.__
+__必要なドメイン情報をコミュニケーションの共通媒体として表現できる、十分に文書化された共有言語を使用し、必要に応じてその言語に変換したり、その言語から変換したりします。__
 
-Many industries establish published languages in the form of data interchange standards. Project teams also develop their own for use within their organization.
+多くの業界では、データ交換標準の形式で公開言語を確立しています。 プロジェクトチームは、組織内で使用するために独自に開発したりもします。
 
-Published language is often combined with open-host service.
+公開された言語は、多くの場合、オープンホストサービスと組み合わされます。
 
 ### Separate Ways
 
-We must be ruthless when it comes to defining requirements. If two sets of functionality have no significant relationship, they can be completely cut loose from each other.
+要件の定義に関しては、冷酷でなければなりません。 2つの機能セットに重要な関係がない場合は、それらを完全に切り離すことができます。
 
-Integration is always expensive, and sometimes the benefit is small.
+統合のコストは常に高いですが、メリットは小さいことが多いです。
 
 Therefore:
 
-__Declare a bounded context to have no connection to the others at all, allowing developers to find simple, specialized solutions within this small scope.__
+__制限されたコンテキストを宣言して、他のユーザーとまったく接続しないようにします。これにより、開発者はこの小さなスコープ内でシンプルで専門的なソリューションを見つけることができます。__
 
 ### Big Ball of Mud *
 
-As we survey existing software systems, trying to understand how distinct models are being applied within defined boundaries, we find parts of systems, often large ones, where models are mixed and boundaries are inconsistent.
+既存のソフトウェアシステムを調査し、明確なモデルが定義された境界内でどのように適用されているかを理解しようとすると、モデルが混在し境界が一貫していないシステムの一部、多くの場合大きなシステムを見つけます。
 
-It is easy to get bogged down in an attempt to describe the context boundaries of models in systems where there simply are no boundaries.
+単に境界が存在しないシステムでモデルのコンテキスト境界を記述しようとすると、行き詰まってしまいがちです。
 
-Well-defined context boundaries only emerge as a result of intellectual choices and social forces (even though the people creating the systems may not always have been consciously aware of these causes at the time). When these factors are absent, or disappear, multiple conceptual systems and mix together, making definitions and rules ambiguous or contradictory. The systems are made to work by contingent logic as features are added. Dependencies crisscross the software. Cause and effect become more and more difficult to trace. Eventually the software congeals into a big ball of mud.
+明確に定義されたコンテキストの境界は、知的選択と社会的力の結果としてのみ出現します（システムを作成する人々は、常にこれらの原因を常に意識していたわけではありませんが）。 これらの要因が存在しない、または消滅すると、複数の概念システムが混ざり合い、定義と規則があいまいまたは矛盾するようになります。 機能が追加されると、システムは条件付きロジックによって機能するようになります。 依存関係はソフトウェアを横断します。 原因と結果の追跡がますます困難になります。 最終的に、ソフトウェアは大きな泥の塊に固まります。
 
-The big ball of mud is actually quite practical for some situations (as described in the original article by Foote and Yoder), but it almost completely prevents the subtlety and precision needed for useful models.
+泥の大きな玉は実際にはいくつかの状況では非常に実用的です（Foote and Yoderのオリジナル記事で説明されています）が、有用なモデルに必要な繊細さと精度をほぼ完全に妨害します。
 
 Therefore:
 
-__Draw a boundary around the entire mess and designate it a big ball of mud. Do not try to apply sophisticated modeling within this context. Be alert to the tendency for such systems to sprawl into other contexts.__
+__混乱全体の周りに境界を描き、それを泥の大きなボールに指定します。 このコンテキスト内で高度なモデリングを適用しようとしないでください。 そのようなシステムが他のコンテキストにスプロールする傾向に注意してください。__
 
 (see http://www.laputan.org/mud/mud.html. Brian Foote and Joseph Yoder)
