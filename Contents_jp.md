@@ -82,25 +82,25 @@ Eric Evans, June 2014
 
 ### Definitions
 
-#### domain
+#### ドメイン (domain)
 
-A sphere of knowledge, influence, or activity. The subject area to which the user applies a program is the domain of the software.
+知識、影響、または活動の範囲。ユーザーがプログラムを適用する課題の領域は、ソフトウェアのドメインです。
 
-#### model
+#### モデル (model)
 
-A system of abstractions that describes selected aspects of a domain and can be used to solve problems related to that domain.
+ドメインの選択された側面を説明し、そのドメインに関連する問題を解決するために使用できる抽象化のシステム。
 
-#### ubiquitous language
+#### ユビキタス言語 (ubiquitous language)
 
-A language structured around the domain model and used by all team members within a bounded context to connect all the activities of the team with the software.
+ドメインモデルを中心に構造化され、チームのすべてのアクティビティをソフトウェアに接続するために、有界コンテキスト内ですべてのチームメンバーが使用する言語。
 
-#### context
+#### コンテキスト (context)
 
-The setting in which a word or statement appears that determines its meaning. Statements about a model can only be understood in a context.
+単語またはステートメントが出現し、その意味が決定される環境。モデルに関するステートメントは、コンテキスト内でのみ理解できる。
 
-#### bounded context
+#### 有界コンテキスト (bounded context)
 
-A description of a boundary (typically a subsystem, or the work of a particular team) within which a particular model is defined and applicable.
+特定のモデルが定義され、適用可能な境界（通常はサブシステム、または特定のチームの作業）の描写。
 
 ### Pattern Language Overview
 
