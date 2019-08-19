@@ -52,9 +52,9 @@ and/or (as another form of highlighted core):
 
 __特にその役割を解明しようとすることなく、モデルのプライマリリポジトリ内のコアドメインの要素にフラグを付けます。 開発者がコアの内外に何があるのか簡単に知ることができるようにします。__
 
-If the distillation document outlines the essentials of the core domain, then it serves as a practical indicator of the significance of a model change. When a model or code change affects the distillation document, it requires consultation with other team members. When the change is made, it requires immediate notification of all team members, and the dissemination of a new version of the document. Changes outside the core or to details not included in the distillation document can be integrated without consultation or notification and will be encountered by other members in the course of their work. Then the developers have the full autonomy that most Agile processes suggest.
+蒸留文書がコア領域の本質を概説している場合、モデル変更の重要性の実用的な指標として機能します。 モデルまたはコードの変更が蒸留ドキュメントに影響する場合、他のチームメンバーとの協議が必要です。 変更が行われた場合、すべてのチームメンバーに即座に通知し、ドキュメントの新しいバージョンを配布する必要があります。 コア外の変更や蒸留文書に含まれていない詳細への変更は、協議や通知なしで統合でき、作業中に他のメンバーが遭遇します。 その後、開発者はほとんどのアジャイルプロセスが示唆する完全な自律性を持ちます。
 
-_Although the vision statement and highlighted core inform and guide, they do not actually modify the model or the code itself. Partitioning generic subdomains physically removes some distracting elements. Next we’ll look at other ways to structurally change the model and the design itself to make the core domain more visible and manageable...._
+_ビジョンステートメントと強調表示されたコアは情報とガイドを提供しますが、実際にモデルやコード自体を変更するわけではありません。 汎用サブドメインを分割すると、注意をそらす要素が物理的に削除されます。 次に、モデルとデザイン自体を構造的に変更して、コアドメインをより見やすく管理しやすくする他の方法を見ていきます...._
 
 ### Cohesive Mechanisms
 
@@ -62,9 +62,9 @@ _Although the vision statement and highlighted core inform and guide, they do no
 
 Therefore:
 
-__概念的にまとまりのあるメカニズムを別の軽量フレームワークに分割します。 特に形式化や文書化されたアルゴリズムのカテゴリに注目してください。 意図を明らかにするインターフェースでフレームワークによって可能となることを明示します。 このドメインの他の要素は、問題の表現（ "what"）に焦点を当て、ソリューションの複雑さ（ "how"）をフレームワークに任せることができます。__
+__概念的にまとまりのあるメカニズムを別の軽量フレームワークに分割します。 特に形式化や文書化されたアルゴリズムのカテゴリに注目してください。 意図を明らかにするインターフェースでフレームワークによって可能となることを明示します。 このドメインの他の要素は、問題の表現 ("what") に焦点を当て、ソリューションの複雑さ ("how") をフレームワークに任せることができます。__
 
-__Factoring out generic subdomains reduces clutter, and cohesive mechanisms serve to encapsulate complex operations. This leaves behind a more focused model, with fewer distractions that add no particular value to the way users conduct their activities. But you are unlikely ever to find good homes for everything in the domain model that is not core. The segregated core takes a direct approach to structurally marking off the core domain...__
+__汎用サブドメインを除外することにより、混乱が軽減され、凝集メカニズムにより複雑な操作がカプセル化されます。 これにより、ユーザーがアクティビティを実行する方法に特別な価値を加えないという意味で、邪魔の少ないより焦点の絞られたモデルが残されます。しかし、コアではないドメインモデルのすべてに適したホームを見つけることはほとんどありません。分離されたコアは、コアドメインを構造的にマークオフするための直接的なアプローチを取ります...__
 
 ### Segregated Core
 
