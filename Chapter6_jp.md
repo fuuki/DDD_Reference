@@ -2,62 +2,62 @@
 
 設計全体にわたるパターンでの要素の役割に関して要素を解釈できるようにするための包括的な原則がない大規模システムでは、開発者は状況の把握が困難になります。 私達は全体の細部を掘り下げることなく、全体の中で個々の部分が果たす役割を理解できなければなりません。
 
-A “large-scale structure” is a language that lets you discuss and understand the system in broad strokes. A set of high-level concepts or rules, or both, establishes a pattern of design for an entire system. This organizing principle can guide design as well as aid understanding. It helps coordinate independent work because there is a shared concept of the big picture: how the roles of various parts shape the whole.
+「大規模構造」とは、システムを大まかに話し合って理解できる言語です。一連の高レベルの概念またはルール、あるいはその両方により、システム全体の設計パターンが確立されます。この組織化の原則は、設計の指針となり、理解を助けることができます。さまざまな部分の役割が全体をどのように形成するかという、全体像の共通概念があるため、独立した作業の調整に役立ちます。
 
 Therefore:
 
-__Devise a pattern of rules or roles and relationships that will span the entire system and that allows some understanding of each part’s place in the whole—even without detailed knowledge of the part’s responsibility.__
+__システム全体にまたがるルールまたはロールおよび関係のパターンを考案します。これにより、部品の責任に関する詳細な知識がなくても、各部品の全体的な位置をある程度理解できます。__
 
 ### Evolving Order
 
-Design free-for-alls produce systems no one can make sense of as a whole, and they are very difficult to maintain. But architectures can straitjacket a project with up-front design assumptions and take too much power away from the developers/designers of particular parts of the application. Soon, developers will dumb down the application to fit the structure, or they will subvert it and have no structure at all, bringing back the problems of uncoordinated development.
+すべてを自由に設計することは、誰もが全体として意味をなさないシステムを生み出し、それらを維持することは非常に困難です。 しかし、アーキテクチャは、設計の前提条件を前もってプロジェクトに拘束し、アプリケーションの特定の部分の開発者/設計者からあまりにも多くの力を奪う可能性があります。 すぐに、開発者はアプリケーションを構造に合わせてダムダウンするか、構造を破壊してまったく構造を持たなくなり、調整されていない開発の問題を取り戻します。
 
 Therefore:
 
-__Let this conceptual large-scale structure evolve with the application, possibly changing to a completely different type of structure along the way. Don’t over constrain the detailed design and model decisions that must be made with detailed knowledge.__
+__この概念的な大規模構造をアプリケーションとともに進化させ、途中で完全に異なるタイプの構造に変更する可能性があります。 詳細な知識で行わなければならない詳細な設計とモデルの決定を過度に制約しないでください。__
 
-__Large-scale structure should be applied when a structure can be found that greatly clarifies the system without forcing unnatural constraints on model development. Because an ill- fitting structure is worse than none, it is best not to shoot for comprehensiveness, but rather to find a minimal set that solves the problems that have emerged. Less is more.__
+__モデル開発に不自然な制約を強いることなく、システムを大幅に明確化する構造が見つかった場合、大規模構造を適用する必要があります。不適切な構造はどれよりも悪いので、包括性を求めて撮影するのではなく、出現した問題を解決する最小限のセットを見つけることが最善です。少ないほうがいい。__
 
-__What follows is a set of four particular patterns of large-scale structure that emerge on some projects and are representative of this kind of pattern.__
+__以下は、いくつかのプロジェクトで出現し、この種のパターンを代表する大規模構造の4つの特定のパターンのセットです。__
 
 ### System Metaphor
 
-Metaphorical thinking is pervasive in software development, especially with models. But the Extreme Programming practice of “metaphor” has come to mean a particular way of using a metaphor to bring order to the development of a whole system.
+メタファー的思考は、ソフトウェア開発、特にモデルで普及しています。 しかし、「メタファー」のエクストリームプログラミングプラクティスは、システム全体の開発に秩序をもたらすためにメタファーを使用する特定の方法を意味するようになりました。
 
-Software designs tend to be very abstract and hard to grasp. Developers and users alike need tangible ways to understand the system and share a view of the system as a whole.
+ソフトウェア設計は非常に抽象的で、把握するのが難しい傾向があります。 開発者もユーザーも、システムを理解し、システム全体のビューを共有するための具体的な方法を必要としています。
 
 Therefore:
 
-__When a concrete analogy to the system emerges that captures the imagination of team members and seems to lead thinking in a useful direction, adopt it as a large-scale structure. Organize the design around this metaphor and absorb it into the ubiquitous language. The system metaphor should both facilitate communication about the system and guide development of it. This increases consistency in different parts of the system, potentially even across different bounded contexts. But because all metaphors are inexact, continually reexamine the metaphor for overextension or inaptness, and be ready to drop it if it gets in the way.__
+__システムへの具体的なアナロジーが現れ、チームメンバーの想像力を捉え、有用な方向に思考を導くように思われる場合、それを大規模な構造として採用します。 このメタファーを中心にデザインを整理し、ユビキタス言語に吸収します。 システムのメタファーは、システムに関するコミュニケーションを促進し、システムの開発をガイドする必要があります。 これにより、システムのさまざまな部分で、場合によってはさまざまな境界のあるコンテキスト全体で一貫性が高まります。 しかし、すべてのメタファーは不正確であるため、過剰な拡張や不適当さのために絶えずメタファーを再検査し、邪魔になったらそれを落とす準備をしてください。__
 
 ### Responsibility Layers
 
-In object-oriented design, individual objects are assigned narrow sets of related responsibilities. Responsibility-driven design also applies to larger scales.
+オブジェクト指向設計では、個々のオブジェクトに関連する一連の狭い責任が割り当てられます。 責任主導型の設計は、大規模にも適用されます。
 
-When each individual object has handcrafted responsibilities, there are no guidelines, no uniformity, and no ability to handle large swaths of the domain together. To give coherence to a large model, it is useful to impose some structure on the assignment of those responsibilities.
+個々のオブジェクトに手作りの責任がある場合、ガイドラインも、均一性も、ドメインの大きな帯を一緒に処理する能力もありません。 大規模モデルに一貫性を持たせるには、これらの責任の割り当てに何らかの構造を課すことが有用です。
 
 Therefore:
 
-__Look at the conceptual dependencies in your model and the varying rates and sources of change of different parts of your domain. If you identify natural strata in the domain, cast them as broad abstract responsibilities. These responsibilities should tell a story of the high-level purpose and design of your system. Refactor the model so that the responsibilities of each domain object, aggregate, and module fit neatly within the responsibility of one layer.__
+__モデルの概念的な依存関係と、ドメインのさまざまな部分の変化の速度と変化の原因を見てください。 ドメイン内の自然の層を特定する場合、それらを広範な抽象的な責任としてキャストします。 これらの責任は、システムの高レベルの目的と設計のストーリーを伝える必要があります。 モデルをリファクタリングして、各ドメインオブジェクト、集合体、およびモジュールの責任が1つのレイヤーの責任にきちんと収まるようにします。__
 
 ### Knowledge Level
 
-A group of objects that describe how another group of objects should behave.
+オブジェクトの別のグループの動作方法を記述するオブジェクトのグループ。
 
-In an application in which the roles and relationships between entities vary in different situations, complexity can explode. Neither fully general models nor highly customized ones serve the users’ needs. Objects end up with references to other types to cover a variety of cases, or with attributes that are used in different ways in different situations. Classes that have the same data and behavior may multiply just to accommodate different assembly rules.
+エンティティ間の役割と関係が異なる状況で異なるアプリケーションでは、複雑さが爆発する可能性があります。 完全に一般的なモデルも高度にカスタマイズされたモデルも、ユーザーのニーズを満たしません。 オブジェクトは、さまざまなケースに対応するために他のタイプへの参照、またはさまざまな状況でさまざまな方法で使用される属性値になります。 同じデータと動作を持つクラスは、異なるアセンブリ規則に対応するためだけに増加する場合があります。
 
 Therefore:
 
-__Create a distinct set of objects that can be used to describe and constrain the structure and behavior of the basic model. Keep these concerns separate as two “levels,” one very concrete, the other reflecting rules and knowledge that a user or super-user is able to customize.__
+__基本モデルの構造と動作を記述および制約するために使用できるオブジェクトの個別のセットを作成します。 これらの懸念を2つの「レベル」に分けてください。1つは非常に具体的なもので、もう1つはユーザーまたはスーパーユーザーがカスタマイズできるルールと知識を反映しています。__
 
 _(see Fowler, M. 1997. Analysis Patterns: Reusable Object Models, Addison-Wesley.)_
 
 ### Pluggable Component Framework
 
-Opportunities arise in a very mature model that is deep and distilled. A pluggable component framework usually only comes into play after a few applications have already been implemented in the same domain.
+機会は、深くて蒸留された非常に成熟したモデルで生じます。 プラガブルコンポーネントフレームワークは、通常、いくつかのアプリケーションが同じドメインに既に実装されている場合にのみ機能します。
 
-When a variety of applications have to interoperate, all based on the same abstractions but designed independently, translations between multiple bounded contexts limit integration. A shared kernel is not feasible for teams that do not work closely together. Duplication and fragmentation raise costs of development and installation, and interoperability becomes very difficult.
+さまざまなアプリケーションを相互運用する必要がある場合、それらはすべて同じ抽象化に基づいているが独立して設計されているため、複数の境界コンテキスト間の変換により統合が制限されます。 共有カーネルは、密接に連携していないチームには適していません。 複製と断片化は、開発とインストールのコストを引き上げ、相互運用性は非常に困難になります。
 
 Therefore:
 
-__Distill an abstract core of interfaces and interactions and create a framework that allows diverse implementations of those interfaces to be freely substituted. Likewise, allow any application to use those components, so long as it operates strictly through the interfaces of the abstract core.__
+__インターフェースとインタラクションの抽象的なコアを蒸留し、これらのインターフェースのさまざまな実装を自由に置き換えることができるフレームワークを作成します。 同様に、抽象コアのインターフェースを介して厳密に動作する限り、すべてのアプリケーションがこれらのコンポーネントを使用できるようにします。__
