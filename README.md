@@ -1,11 +1,11 @@
 # DDD-Reference
+
 DDD Reference Japanese translation
 
 ## 概要
 
 - [DDD Reference](http://domainlanguage.com/ddd/reference/) を日本語訳したものです
 - 個人で訳しているだけなので、内容・精度は保証できません
-- 現在作業中で、8月中までには終わらせたいと思っています
 
 ## 原著情報
 
